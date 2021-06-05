@@ -1,0 +1,43 @@
+.example {
+  max-width: 600px;
+  margin: 40px auto;
+  background-color: #f2f2f2;
+  padding: 30px;
+}
+
+.example h1 {
+  text-align: center;
+}
+
+.example .stack_container {
+  flex-direction: column;
+  justify-content: flex-end;
+  display: flex;
+  height: 300px;
+  background-color: white;
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+.example .stack {
+  overflow: auto;
+}
+
+.example .stack .stack_item {
+  border: 1px solid black;
+  padding: 4px 80px;
+  text-align: center;
+  transition: all 0.2s ease;
+}
+
+.example .stack .stack_item.peeking {
+  background-color: #333;
+  color: white;
+}
+
+.example .buttons-container {
+  max-width: max-content;
+  margin: 30px auto 0 auto;
+  display: flex;
+  align-items: center;
+}
