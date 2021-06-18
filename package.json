@@ -1,0 +1,23 @@
+{
+  "name": "fun-with-js",
+  "version": "1.0.0",
+  "description": "Code for my [YouTube Playlist - Fun with Javascript](https://www.youtube.com/playlist?list=PL2sQdFoGnLIjq2276iQbuUCsmA8tXvcQC)",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AhsanAyaz/fun-with-javascript.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AhsanAyaz/fun-with-javascript/issues"
+  },
+  "homepage": "https://github.com/AhsanAyaz/fun-with-javascript#readme",
+  "devDependencies": {
+    "jest": "^27.0.4"
+  }
+}

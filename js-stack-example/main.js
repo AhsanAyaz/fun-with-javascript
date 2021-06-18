@@ -52,7 +52,7 @@
   const myStack = new Stack();
 
   const peekStackItem = () => {
-    const peekedElement = document.querySelector(".stack_item:first-child");
+    const peekedElement = document.querySelector(".box_item:first-child");
     if (!peekedElement) {
       return;
     }
@@ -96,13 +96,11 @@
   };
 
   const renderStack = () => {
-    const stackElement = document.querySelector(".stack");
-    stackElement
-      .querySelectorAll(".stack_item")
-      .forEach((item) => item.remove());
+    const stackElement = document.querySelector(".box");
+    stackElement.querySelectorAll(".box_item").forEach((item) => item.remove());
     myStack.items.forEach((item) => {
       const stackItemElement = document.createElement("DIV");
-      stackItemElement.classList.add("stack_item");
+      stackItemElement.classList.add("box_item");
       stackItemElement.textContent = item;
       stackElement.prepend(stackItemElement);
     });
