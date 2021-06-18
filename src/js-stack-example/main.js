@@ -1,3 +1,4 @@
+import "../styles/globals.css";
 (() => {
   class Stack {
     items = [];
@@ -25,7 +26,7 @@
     }
 
     peek() {
-      return this.items[this.item.length - 1];
+      return this.items[this.items.length - 1];
     }
   }
 
