@@ -1,0 +1,42 @@
+.example .box_container {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  width: 400px;
+  max-width: 400px;
+  position: relative;
+}
+
+.example .box {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+  overflow-x: scroll;
+}
+
+.example .box .box_item {
+  padding: 8px;
+}
+
+.example .box_container::before,
+.example .box_container::after {
+  font-weight: bold;
+  color: #333;
+  position: absolute;
+}
+.example .box_container::before {
+  content: "Rear";
+  left: -44px;
+}
+.example .box_container::after {
+  content: "Front";
+  right: -50px;
+}
+
+.example .buttons-container {
+  flex-direction: column;
+}
+.example .buttons-container .btn-group {
+  margin: 10px auto;
+}
