@@ -6,7 +6,7 @@ module.exports = {
   entry: {
     js_queue: "./src/js-queue/queue.js",
     js_stack: "./src/js-stack-example/main.js",
-    js_dequeue: "./src/js-dequeue/dequeue.js",
+    js_dequeue: "./src/js-dequeue/main.js",
   },
   devtool: "inline-source-map",
   plugins: [

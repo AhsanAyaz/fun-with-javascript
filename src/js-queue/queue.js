@@ -3,11 +3,11 @@ import "./js-queue.css";
 
 export class Queue {
   items = {};
-  count = 0;
+  itemToAddIndex = 0; // was previously called `count`
   itemToRemoveIndex = 0;
   add(item) {
-    this.items[this.count] = item;
-    this.count++;
+    this.items[this.itemToAddIndex] = item;
+    this.itemToAddIndex++;
   }
 
   isEmpty() {
@@ -16,7 +16,7 @@ export class Queue {
 
   clear() {
     this.items = {};
-    this.count = 0;
+    this.itemToAddIndex = 0;
     this.itemToRemoveIndex = 0;
   }
 
@@ -31,7 +31,7 @@ export class Queue {
   }
 
   size() {
-    return this.count - this.itemToRemoveIndex;
+    return this.itemToAddIndex - this.itemToRemoveIndex;
   }
 
   peek() {
