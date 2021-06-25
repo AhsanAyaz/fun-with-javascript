@@ -3,11 +3,11 @@ import "./js-queue.css";
 
 export class Queue {
   items = {};
-  itemToAddIndex = 0; // was previously called `count`
-  itemToRemoveIndex = 0;
+  itemToAddKey = 0; // was previously called `count`
+  itemToRemoveKey = 0;
   add(item) {
-    this.items[this.itemToAddIndex] = item;
-    this.itemToAddIndex++;
+    this.items[this.itemToAddKey] = item;
+    this.itemToAddKey++;
   }
 
   isEmpty() {
@@ -16,26 +16,26 @@ export class Queue {
 
   clear() {
     this.items = {};
-    this.itemToAddIndex = 0;
-    this.itemToRemoveIndex = 0;
+    this.itemToAddKey = 0;
+    this.itemToRemoveKey = 0;
   }
 
   remove() {
     if (this.isEmpty()) {
       return undefined;
     }
-    const itemToRemove = this.items[this.itemToRemoveIndex];
-    delete this.items[this.itemToRemoveIndex];
-    this.itemToRemoveIndex++;
-    return itemToRemove;
+    const item = this.items[this.itemToRemoveKey];
+    delete this.items[this.itemToRemoveKey];
+    this.itemToRemoveKey++;
+    return item;
   }
 
   size() {
-    return this.itemToAddIndex - this.itemToRemoveIndex;
+    return this.itemToAddKey - this.itemToRemoveKey;
   }
 
   peek() {
-    return this.items[this.itemToRemoveIndex];
+    return this.items[this.itemToRemoveKey];
   }
 }
 
@@ -50,6 +50,18 @@ const peekQueueItem = () => {
   setTimeout(() => {
     peekedElement.classList.remove("peeking");
   }, 500);
+};
+
+const renderQueue = () => {
+  const queueElement = document.querySelector(".box");
+  queueElement.querySelectorAll(".box_item").forEach((item) => item.remove());
+  for (const key in myQueue.items) {
+    const item = myQueue.items[key];
+    const queueItemElement = document.createElement("DIV");
+    queueItemElement.classList.add("box_item");
+    queueItemElement.textContent = item;
+    queueElement.append(queueItemElement);
+  }
 };
 
 const initiateHandlers = () => {
@@ -76,21 +88,8 @@ const initiateHandlers = () => {
   });
 };
 
-const renderQueue = () => {
-  const queueElement = document.querySelector(".box");
-  queueElement.querySelectorAll(".box_item").forEach((item) => item.remove());
-  for (const key in myQueue.items) {
-    const item = myQueue.items[key];
-    const queueItemElement = document.createElement("DIV");
-    queueItemElement.classList.add("box_item");
-    queueItemElement.textContent = item;
-    queueElement.append(queueItemElement);
-  }
-};
-
 const main = () => {
   initiateHandlers();
-  renderQueue();
 };
 
 main();
