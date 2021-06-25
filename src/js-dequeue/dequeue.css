@@ -12,7 +12,6 @@
   flex-direction: row;
   display: flex;
   align-items: center;
-  overflow-x: scroll;
 }
 
 .example .box .box_item {
@@ -39,4 +38,12 @@
 }
 .example .buttons-container .btn-group {
   margin: 10px auto;
+}
+
+section {
+  margin: 20px auto;
+}
+
+#palindromeBtn {
+  margin-top: 10px;
 }
