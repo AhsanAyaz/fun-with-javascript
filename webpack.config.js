@@ -1,44 +1,76 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { readdirSync, readFileSync, existsSync } = require('fs');
+
+const excludedFolders = ['styles'];
+
+const srcDir = './src';
+
+const getDirectories = (source) =>
+  readdirSync(source, { withFileTypes: true })
+    .filter((dirent) => {
+      return dirent.isDirectory() && !excludedFolders.includes(dirent.name);
+    })
+    .map((dirent) => dirent.name);
+
+const parseTitle = (body) => {
+  let match = body.match(/<title>([^<]*)<\/title>/);
+  if (!match || typeof match[1] !== 'string')
+    throw new Error('Unable to parse the title tag');
+  return match[1];
+};
+
+let entries = {};
+const defaultFileNames = ['script.js', 'main.js'];
+
+const projects = getDirectories(srcDir);
+
+const plugins = projects.map((folderName) => {
+  const folderPath = `${srcDir}/${folderName}`;
+  const htmlContent = readFileSync(`${folderPath}/index.html`, 'utf-8');
+  const title = parseTitle(htmlContent);
+  let javascriptFile;
+  const potentialFileNames = [...defaultFileNames, `${folderName}.js`];
+  for (let i = 0, len = potentialFileNames.length; i < len; ++i) {
+    if (existsSync(`${folderPath}/${potentialFileNames[i]}`)) {
+      javascriptFile = `${folderPath}/${potentialFileNames[i]}`;
+      break;
+    }
+  }
+  if (!javascriptFile) {
+    throw new Error(`No entry file found for project ${folderName}`);
+  }
+  entries[folderName] = javascriptFile;
+  const config = {
+    title,
+    chunks: [folderName],
+    template: `${folderPath}/index.html`,
+    filename: `./${folderName}/index.html`,
+    inject: 'body',
+  };
+  return new HtmlWebpackPlugin(config);
+});
 
 module.exports = {
-  mode: "development",
-  entry: {
-    js_queue: "./src/js-queue/queue.js",
-    js_stack: "./src/js-stack-example/main.js",
-    js_dequeue: "./src/js-dequeue/main.js",
+  mode: 'development',
+  entry: entries,
+  devtool: 'inline-source-map',
+  plugins,
+  devServer: {
+    contentBase: path.join(__dirname, 'dist'),
+    compress: true,
+    port: 8080,
   },
-  devtool: "inline-source-map",
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: "JS Queue",
-      template: "./src/js-queue/index.html",
-      filename: "./js_queue/index.html",
-      inject: false,
-    }),
-    new HtmlWebpackPlugin({
-      title: "JS Stack",
-      template: "./src/js-stack-example/index.html",
-      filename: "./js_stack/index.html",
-      inject: false,
-    }),
-    new HtmlWebpackPlugin({
-      title: "JS DeQueue",
-      template: "./src/js-dequeue/index.html",
-      filename: "./js_dequeue/index.html",
-      inject: false,
-    }),
-  ],
   output: {
-    filename: "[name]/[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    filename: '[name]/[name].bundle.js',
+    path: path.resolve(__dirname, 'dist'),
     clean: true,
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader"],
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
