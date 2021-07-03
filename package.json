@@ -7,7 +7,7 @@
     "build": "webpack",
     "start": "node_modules/.bin/concurrently \"npm run watch\" \"npm run serve\"",
     "watch": "webpack --watch",
-    "serve": "http-server ./dist",
+    "serve": "webpack serve",
     "test": "jest"
   },
   "repository": {
@@ -27,16 +27,17 @@
     "concurrently": "^6.2.0",
     "css-loader": "^5.2.6",
     "html-webpack-plugin": "^5.3.1",
-    "http-server": "^0.12.3",
     "jest": "^27.0.4",
     "style-loader": "^2.0.0",
     "webpack": "^5.39.1",
-    "webpack-cli": "^4.7.2"
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
   },
   "jest": {
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js",
       "\\.(css|less)$": "<rootDir>/__mocks__/styleMock.js"
     }
-  }
+  },
+  "dependencies": {}
 }

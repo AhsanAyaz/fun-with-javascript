@@ -1,4 +1,4 @@
-import "../styles/globals.css";
+import '../styles/globals.css';
 (() => {
   class Stack {
     items = [];
@@ -34,7 +34,7 @@ import "../styles/globals.css";
     const reminderStack = new Stack();
     let currentNumber = decimalNumber;
     let currentReminder;
-    let binaryString = "";
+    let binaryString = '';
     while (currentNumber > 0) {
       currentReminder = Math.floor(currentNumber % 2);
       reminderStack.add(currentReminder);
@@ -53,13 +53,13 @@ import "../styles/globals.css";
   const myStack = new Stack();
 
   const peekStackItem = () => {
-    const peekedElement = document.querySelector(".box_item:first-child");
+    const peekedElement = document.querySelector('.box_item:first-child');
     if (!peekedElement) {
       return;
     }
-    peekedElement.classList.add("peeking");
+    peekedElement.classList.add('peeking');
     setTimeout(() => {
-      peekedElement.classList.remove("peeking");
+      peekedElement.classList.remove('peeking');
     }, 500);
   };
 
@@ -69,39 +69,39 @@ import "../styles/globals.css";
   };
 
   const initiateHandlers = () => {
-    const addItemBtn = document.querySelector("#addItemBtn");
-    const peekItemBtn = document.querySelector("#peekItemBtn");
-    const takeOutItemBtn = document.querySelector("#takeOutItemBtn");
-    const dToBConvertBtn = document.querySelector("#dToBConvertBtn");
+    const addItemBtn = document.querySelector('#addItemBtn');
+    const peekItemBtn = document.querySelector('#peekItemBtn');
+    const takeOutItemBtn = document.querySelector('#takeOutItemBtn');
+    const dToBConvertBtn = document.querySelector('#dToBConvertBtn');
 
-    dToBConvertBtn.addEventListener("click", () => {
+    dToBConvertBtn.addEventListener('click', () => {
       myStack.clear();
-      const input = document.querySelector("#decimalToBinaryInput");
+      const input = document.querySelector('#decimalToBinaryInput');
       decimalToBinary(Number(input.value));
     });
 
-    addItemBtn.addEventListener("click", () => {
+    addItemBtn.addEventListener('click', () => {
       const randomNumber = Math.round(Math.random() * 50 + 1);
       addItemToStack(randomNumber);
     });
 
-    takeOutItemBtn.addEventListener("click", () => {
+    takeOutItemBtn.addEventListener('click', () => {
       myStack.takeOut();
       renderStack();
       peekStackItem();
     });
 
-    peekItemBtn.addEventListener("click", () => {
+    peekItemBtn.addEventListener('click', () => {
       peekStackItem();
     });
   };
 
   const renderStack = () => {
-    const stackElement = document.querySelector(".box");
-    stackElement.querySelectorAll(".box_item").forEach((item) => item.remove());
+    const stackElement = document.querySelector('.box');
+    stackElement.querySelectorAll('.box_item').forEach((item) => item.remove());
     myStack.items.forEach((item) => {
-      const stackItemElement = document.createElement("DIV");
-      stackItemElement.classList.add("box_item");
+      const stackItemElement = document.createElement('DIV');
+      stackItemElement.classList.add('box_item');
       stackItemElement.textContent = item;
       stackElement.prepend(stackItemElement);
     });

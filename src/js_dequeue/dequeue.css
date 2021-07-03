@@ -25,11 +25,11 @@
   position: absolute;
 }
 .example .box_container::before {
-  content: "Front";
+  content: 'Front';
   left: -50px;
 }
 .example .box_container::after {
-  content: "Rear";
+  content: 'Rear';
   right: -50px;
 }
 
