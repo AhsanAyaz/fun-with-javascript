@@ -18,18 +18,18 @@ body > main {
   outline: none;
 }
 
-.example {
+.app-container {
   max-width: 600px;
   margin: auto;
   background-color: #f2f2f2;
   padding: 30px;
 }
 
-.example h1 {
+.app-container h1 {
   text-align: center;
 }
 
-.example .box_container {
+.app-container .box_container {
   flex-direction: column;
   justify-content: flex-end;
   display: flex;
@@ -39,23 +39,23 @@ body > main {
   margin: 0 auto;
 }
 
-.example .box {
+.app-container .box {
   overflow: auto;
 }
 
-.example .box .box_item {
+.app-container .box .box_item {
   border: 1px solid black;
   padding: 4px 80px;
   text-align: center;
   transition: all 0.2s ease;
 }
 
-.example .box .box_item.peeking {
+.app-container .box .box_item.peeking {
   background-color: #333;
   color: white;
 }
 
-.example .buttons-container {
+.app-container .buttons-container {
   max-width: max-content;
   margin: 30px auto 0 auto;
   display: flex;
