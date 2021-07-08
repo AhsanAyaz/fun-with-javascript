@@ -1,0 +1,36 @@
+html,
+body {
+  font-family: 'Kufam', sans-serif;
+}
+
+a {
+  color: #333;
+}
+
+a:hover {
+  opacity: 0.8;
+}
+
+img {
+  max-width: 100%;
+}
+
+.image-with-bg {
+  text-align: center;
+}
+
+.header,
+.container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-top: 40px;
+}
+
+.container__content {
+  padding: 10px;
+  background-color: #f7f7f7;
+}
