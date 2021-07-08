@@ -5,9 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "start": "node_modules/.bin/concurrently \"npm run watch\" \"npm run serve\"",
+    "start": "webpack serve",
     "watch": "webpack --watch",
-    "serve": "webpack serve",
     "test": "jest"
   },
   "repository": {
