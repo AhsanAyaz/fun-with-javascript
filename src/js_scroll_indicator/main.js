@@ -1,7 +1,8 @@
 import './style.css';
-
+import ScrollIndicator from './scrollIndicator';
 const main = () => {
-  console.log('https://buymeacoffee.com/muhd.ahsanayaz');
+  const indicator = new ScrollIndicator();
+  console.log(indicator);
 };
 
 main();
