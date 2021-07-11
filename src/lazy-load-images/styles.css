@@ -28,6 +28,11 @@
   color: #333;
 }
 
+.app-container .card .card-img-top {
+  height: 160px;
+  object-fit: cover;
+}
+
 .app-container section .col-md-6 {
   display: flex;
   align-items: center;
