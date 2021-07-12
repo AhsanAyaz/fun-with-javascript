@@ -4,7 +4,7 @@ const { readdirSync, readFileSync, existsSync } = require('fs');
 
 const excludedFolders = ['styles'];
 
-const srcDir = './src';
+const srcDir = path.join(__dirname, './src');
 
 const getDirectories = (source) =>
   readdirSync(source, { withFileTypes: true })
@@ -12,7 +12,6 @@ const getDirectories = (source) =>
       return dirent.isDirectory() && !excludedFolders.includes(dirent.name);
     })
     .map((dirent) => dirent.name);
-
 const parseTitle = (body) => {
   let match = body.match(/<title>([^<]*)<\/title>/);
   if (!match || typeof match[1] !== 'string')
@@ -26,14 +25,18 @@ const defaultFileNames = ['script.js', 'main.js'];
 const projects = getDirectories(srcDir);
 
 const plugins = projects.map((folderName) => {
-  const folderPath = `${srcDir}/${folderName}`;
-  const htmlContent = readFileSync(`${folderPath}/index.html`, 'utf-8');
+  const folderPath = path.join(srcDir, `./${folderName}`);
+  const htmlContent = readFileSync(
+    path.join(folderPath, './index.html'),
+    'utf-8'
+  );
   const title = parseTitle(htmlContent);
   let javascriptFile;
   const potentialFileNames = [...defaultFileNames, `${folderName}.js`];
   for (let i = 0, len = potentialFileNames.length; i < len; ++i) {
-    if (existsSync(`${folderPath}/${potentialFileNames[i]}`)) {
-      javascriptFile = `${folderPath}/${potentialFileNames[i]}`;
+    const filePath = path.join(folderPath, `./${potentialFileNames[i]}`);
+    if (existsSync(filePath)) {
+      javascriptFile = filePath;
       break;
     }
   }
@@ -44,8 +47,8 @@ const plugins = projects.map((folderName) => {
   const config = {
     title,
     chunks: [folderName],
-    template: `${folderPath}/index.html`,
-    filename: `./${folderName}/index.html`,
+    template: path.join(folderPath, './index.html'),
+    filename: path.join(folderName, './index.html'),
     inject: 'body',
   };
   return new HtmlWebpackPlugin(config);
@@ -60,6 +63,7 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
     port: 8080,
+    writeToDisk: true,
   },
   output: {
     filename: '[name]/[name].bundle.js',
