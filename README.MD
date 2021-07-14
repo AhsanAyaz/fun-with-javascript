@@ -1,6 +1,9 @@
 # Fun with JavaScript Series
 
-Code for my [YouTube Playlist - Data Structures and Algorithms](https://www.youtube.com/watch?v=SfoFiWwRwXg&list=PL2sQdFoGnLIgTJ4hP3ab4HoPOe4BT4ose)
+Code for the following playlists on my YouTube Channel:
+
+- [Data Structures and Algorithms](https://www.youtube.com/watch?v=SfoFiWwRwXg&list=PL2sQdFoGnLIgTJ4hP3ab4HoPOe4BT4ose)
+- [Fun with JavaScript](https://www.youtube.com/watch?v=9A9heyoVqxU&list=PL2sQdFoGnLIjq2276iQbuUCsmA8tXvcQC)
 
 ## Like my work?
 
