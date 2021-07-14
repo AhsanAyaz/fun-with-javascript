@@ -6,8 +6,9 @@ const CardItem = (index) => {
   return `
     <div class="card" style="width: 18rem">
       <img
-        src="https://picsum.photos/${imageWidth}/${imageHeight}"
-        class="card-img-top"
+        loading="lazy"
+        data-src="https://picsum.photos/${imageWidth}/${imageHeight}"
+        class="card-img-top lazyload"
         alt="..."
       />
       <div class="card-body">
