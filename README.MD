@@ -1,5 +1,7 @@
 # Fun with JavaScript Series
 
+Sonar Status: [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=AhsanAyaz_fun-with-javascript&metric=alert_status)](https://sonarcloud.io/dashboard?id=AhsanAyaz_fun-with-javascript)
+
 Code for the following playlists on my YouTube Channel:
 
 - [Data Structures and Algorithms](https://www.youtube.com/watch?v=SfoFiWwRwXg&list=PL2sQdFoGnLIgTJ4hP3ab4HoPOe4BT4ose)
