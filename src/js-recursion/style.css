@@ -1,0 +1,47 @@
+.main-section {
+  margin-top: 20px;
+}
+
+.fact-list {
+  min-height: 300px;
+}
+
+.fact-list-item {
+  animation: nested-item-appear 0.3s ease-in;
+  text-align: center;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  padding: 20px 30px;
+  margin-bottom: 10px;
+}
+
+.fact-list-item--delete {
+  animation: nested-item-disappear 0.5s ease-in;
+}
+
+@keyframes nested-item-appear {
+  0% {
+    transform: translateY(-100%) scale(0, 0);
+  }
+  50% {
+    transform: translateY(-50%) scale(0.5, 0.5);
+  }
+  100% {
+    position: relative;
+    transform: translateY(0) scale(1, 1);
+  }
+}
+
+@keyframes nested-item-disappear {
+  0% {
+    transform: translateY(0) scale(1, 1);
+  }
+  50% {
+    transform: translateY(-50%) scale(0.5, 0.5);
+  }
+  100% {
+    transform: translateY(-100%) scale(0, 0);
+    visibility: hidden;
+  }
+}
