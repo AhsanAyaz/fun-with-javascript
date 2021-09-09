@@ -2,6 +2,10 @@
   margin-top: 20px;
 }
 
+#calcFactBtn {
+  margin-top: 10px;
+}
+
 .fact-list {
   min-height: 300px;
 }
@@ -14,10 +18,6 @@
   box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
   padding: 20px 30px;
   margin-bottom: 10px;
-}
-
-.fact-list-item--delete {
-  animation: nested-item-disappear 0.5s ease-in;
 }
 
 @keyframes nested-item-appear {

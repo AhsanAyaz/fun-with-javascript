@@ -3,18 +3,18 @@ import './style.css';
 import calculateFactorial from './calculateFactorial';
 import calculateFactorialWithUI from './calculateFactorialWithUI';
 
-const main = () => {
+const onCalcBtnClick = () => {
   const factorialInput = document.querySelector('#factorialInput');
-  factorialInput.addEventListener('change', (e) => {
-    const value = +e.target.value;
-    console.log(calculateFactorial(value));
-  });
   const jobQueue = [];
-  const number = 5;
+  const jobTimer = 1000;
+  const number = factorialInput.value;
+  let result = 0;
+  document.getElementById('factorialNumber').textContent = `${number}!`;
   jobQueue.push({
     action: 'nested',
     n: number,
   });
+  showCalculation();
   calculateFactorialWithUI(number, {
     onNested: (n) => {
       jobQueue.push({
@@ -44,13 +44,18 @@ const main = () => {
     const job = jobQueue.shift();
     if (!job) {
       clearInterval(timer);
+      document.getElementById('factorialNumber').textContent += ` = ${result}`;
+      enableCaclBtn();
+      enableInput();
       return;
     }
     const factList = document.querySelector('.fact-list');
     switch (job.action) {
       case 'nested':
         if (factList.children.length) {
-          factList.lastChild.textContent += '  👇';
+          factList.lastChild.textContent = `calculating ${job.n + 1} x ${
+            job.n
+          }! 👇`;
         }
         const div = document.createElement('DIV');
         div.textContent = `calculating ${job.n}!`;
@@ -67,23 +72,71 @@ const main = () => {
           const divId = `job_${job.n}`;
           targetDiv.id = divId;
           setTimeout(() => {
-            targetDiv.classList.add('fact-list-item--delete');
+            const animationTime = 500;
+            const delayTime = jobTimer / 2 - animationTime;
+            targetDiv.style.animation = `nested-item-disappear ${animationTime}ms ease-in ${delayTime}ms`;
             targetDiv.addEventListener('webkitAnimationEnd', () => {
               targetDiv.remove();
             });
-          }, 500);
+          }, jobTimer / 2);
         }
         break;
       case 'return':
         if (factList.children.length) {
           factList.lastChild.remove();
-        } else {
-          clearInterval(timer);
+          result = job.result;
         }
       default:
         break;
     }
-  }, 1000);
+  }, jobTimer);
+};
+
+const showCalculation = () => {
+  const calculationContainer = document.getElementById('calculationContainer');
+  calculationContainer.style.visibility = 'visible';
+};
+
+const hideCalculation = () => {
+  const calculationContainer = document.getElementById('calculationContainer');
+  calculationContainer.style.visibility = 'hidden';
+};
+
+const disableInput = () => {
+  const factorialInput = document.getElementById('factorialInput');
+  factorialInput.setAttribute('disabled', true);
+};
+
+const enableInput = () => {
+  const factorialInput = document.getElementById('factorialInput');
+  factorialInput.removeAttribute('disabled');
+};
+
+const enableCaclBtn = () => {
+  const calcFactBtn = document.getElementById('calcFactBtn');
+  calcFactBtn.removeAttribute('disabled');
+};
+
+const disableCaclBtn = () => {
+  const calcFactBtn = document.getElementById('calcFactBtn');
+  calcFactBtn.setAttribute('disabled', true);
+};
+
+const main = () => {
+  disableCaclBtn();
+  hideCalculation();
+  const factorialInput = document.getElementById('factorialInput');
+  const calcFactBtn = document.getElementById('calcFactBtn');
+  factorialInput.addEventListener('input', (e) => {
+    const inputVal = e.target.value;
+    inputVal ? enableCaclBtn() : disableCaclBtn();
+    hideCalculation();
+  });
+  calcFactBtn.addEventListener('click', () => {
+    disableCaclBtn();
+    disableInput();
+    onCalcBtnClick();
+  });
 };
 
 main();
