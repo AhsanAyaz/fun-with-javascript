@@ -6,6 +6,10 @@ import { renderLinkedList, initiateHandlers } from './ui-handlers';
 const linkedList = new LinkedList();
 
 const main = () => {
+  linkedList.push('22');
+  linkedList.push('33');
+  linkedList.push('abc');
+  linkedList.push('xyz');
   initiateHandlers(linkedList);
   renderLinkedList(linkedList);
 };

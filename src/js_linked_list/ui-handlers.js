@@ -44,7 +44,7 @@ export const initiateHandlers = (linkedList) => {
   insertAtBtn.addEventListener('click', () => {
     const element = prompt('Enter element to add to linkedlist');
     const index = prompt('Enter the index the element is to be added at');
-    linkedList.insertElementAt(element, Number(index));
+    linkedList.insertAt(element, Number(index));
     renderLinkedList(linkedList);
   });
   getElementAtBtn.addEventListener('click', () => {
