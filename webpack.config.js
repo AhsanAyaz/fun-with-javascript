@@ -1,6 +1,9 @@
 const path = require('path');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { readdirSync, readFileSync, existsSync } = require('fs');
+
+const isProduction = process.env.NODE_ENV !== 'development';
 
 const excludedFolders = ['styles'];
 
@@ -54,8 +57,28 @@ const plugins = projects.map((folderName) => {
   return new HtmlWebpackPlugin(config);
 });
 
+if (isProduction) {
+  const htmlArr = projects.map((folderName) => {
+    return `<a href="${folderName}" class="list-group-item">${folderName}</a>`;
+  });
+  const copyDirectoryHTML = new CopyWebpackPlugin({
+    patterns: [
+      {
+        from: path.join(srcDir, `./directory.html`),
+        to: 'index.html',
+        transform(content) {
+          return content
+            .toString()
+            .replace('{{Directories}}', htmlArr.join(''));
+        },
+      },
+    ],
+  });
+  plugins.push(copyDirectoryHTML);
+}
+
 module.exports = {
-  mode: 'development',
+  mode: process.env.NODE_ENV,
   entry: entries,
   devtool: 'inline-source-map',
   plugins,
