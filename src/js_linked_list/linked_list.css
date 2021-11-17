@@ -41,6 +41,7 @@
   padding: 8px;
   position: relative;
   margin-left: 20px;
+  transition: all ease 0.2s;
 }
 
 .app-container .box_container::before,
