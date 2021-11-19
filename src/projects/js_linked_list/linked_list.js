@@ -1,9 +1,9 @@
-const defaultEqFn = (a, b) => a === b;
+export const defaultEqFn = (a, b) => a === b;
 
-class Node {
-  constructor(element) {
+export class Node {
+  constructor(element, next = null) {
     this.element = element;
-    this.next = null;
+    this.next = next;
   }
 }
 
@@ -27,6 +27,7 @@ class LinkedList {
       current.next = node;
     }
     this.count++;
+    return node;
   }
 
   removeAt(index) {
@@ -77,7 +78,7 @@ class LinkedList {
     }
 
     this.count++;
-    return true;
+    return node;
   }
 
   indexOf(element) {
@@ -127,5 +128,4 @@ class LinkedList {
     return linkedListArr.join(', ');
   }
 }
-
 export default LinkedList;

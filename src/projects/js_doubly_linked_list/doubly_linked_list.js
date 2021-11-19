@@ -1,131 +1,59 @@
-const defaultEqFn = (a, b) => a === b;
-
-class Node {
-  constructor(element) {
-    this.element = element;
-    this.next = null;
+import LinkedList, { Node, defaultEqFn } from '../js_linked_list/linked_list';
+export class DoublyLLNode extends Node {
+  constructor(element, next, previous) {
+    super(element, next);
+    this.previous = previous;
   }
 }
 
-class LinkedList {
+class DoublyLinkedList extends LinkedList {
   constructor(equalsFn = defaultEqFn) {
-    this.head = null;
-    this.count = 0;
-    this.equalsFn = equalsFn;
+    super(equalsFn);
+    this.tail = null;
   }
 
   push(element) {
-    let current;
-    const node = new Node(element);
-    if (this.head === null) {
-      this.head = node;
-    } else {
-      current = this.head;
-      while (current.next !== null) {
-        current = current.next;
-      }
-      current.next = node;
-    }
-    this.count++;
-  }
-
-  removeAt(index) {
-    if (index < 0 || index >= this.size()) {
-      return undefined;
-    }
-
-    let current = this.head;
-    if (index === 0) {
-      this.head = current.next;
-    } else {
-      const previous = this.getElementAt(index - 1);
-      current = previous.next;
-      previous.next = current.next;
-    }
-
-    this.count--;
-    return current.element;
-  }
-
-  getElementAt(index) {
-    if (index < 0 || index > this.size()) {
-      return undefined;
-    }
-
-    let current = this.head;
-    for (let i = 0; i < index && current !== null; i++) {
-      current = current.next;
-    }
-    return current;
+    const previousElement = super.getElementAt(this.size() - 1);
+    const newNode = super.push(element);
+    newNode.previous = previousElement || null;
+    this.tail = newNode;
   }
 
   insertAt(element, index) {
     if (index < 0 || index > this.size()) {
-      return undefined;
+      return false;
     }
-
-    const node = new Node(element);
-    if (index === 0) {
-      const current = this.head;
-      node.next = current;
-      this.head = node;
-    } else {
-      const previous = this.getElementAt(index - 1);
-      const current = previous.next;
-      node.next = current;
-      previous.next = node;
-    }
-
-    this.count++;
-    return true;
-  }
-
-  indexOf(element) {
     let current = this.head;
-    for (let i = 0; i < this.size() && current !== null; i++) {
-      if (this.equalsFn(element, current.element)) {
-        return i;
+    if (index === 0) {
+      const newNode = new DoublyLLNode(element);
+      // adding the first item of the linked list
+      if (this.head === null) {
+        this.head = newNode;
+        this.tail = newNode;
+      } else {
+        newNode.next = current;
+        current.previous = newNode;
+        this.head = newNode;
       }
-      current = current.next;
+      this.count++;
+      return newNode;
+    } else if (index === this.size()) {
+      // adding the first item of the linked list
+      return this.push(element);
+    } else {
+      const previousElement = super.getElementAt(index - 1);
+      const current = super.getElementAt(index);
+      const newNode = super.insertAt(element, index);
+      newNode.previous = previousElement || null;
+      current.previous = newNode;
+      return newNode;
     }
-    return -1;
-  }
-
-  remove(element) {
-    const index = this.indexOf(element);
-    return this.removeAt(index);
   }
 
   clear() {
-    this.head = null;
-    this.count = 0;
-  }
-
-  size() {
-    return this.count;
-  }
-
-  isEmpty() {
-    return this.size() === 0;
-  }
-
-  getHead() {
-    return this.head;
-  }
-
-  toString() {
-    if (this.isEmpty()) {
-      return '';
-    }
-    const linkedListArr = [];
-    let current = this.head;
-    for (let i = 0; i < this.size() && current !== null; i++) {
-      linkedListArr.push(current.element);
-      current = current.next;
-    }
-
-    return linkedListArr.join(', ');
+    super.clear();
+    this.tail = null;
   }
 }
 
-export default LinkedList;
+export default DoublyLinkedList;

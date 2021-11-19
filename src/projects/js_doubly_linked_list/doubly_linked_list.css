@@ -1,0 +1,99 @@
+.doubly-linked-list .app-container {
+  max-width: 960px;
+}
+.doubly-linked-list .app-container .box_container::before {
+  content: attr(before-text);
+  white-space: break-spaces;
+}
+
+.doubly-linked-list .app-container .box_container {
+  height: 90px;
+  max-width: unset;
+  width: 80%;
+}
+
+.doubly-linked-list .app-container .box .box_item:first-child {
+  margin-left: 4px;
+}
+
+.doubly-linked-list .app-container .box .box_item:first-child .icon-arrow-left,
+.doubly-linked-list .app-container .box .box_item:first-child::before {
+  color: teal;
+}
+
+.doubly-linked-list .app-container .box .box_item:last-child .icon-arrow-right {
+  display: none;
+}
+
+.doubly-linked-list .app-container .box__arrow {
+  color: rgb(126, 9, 9);
+}
+
+.doubly-linked-list .app-container .box__line {
+  background-color: rgb(126, 9, 9);
+  position: relative;
+}
+
+/* .doubly-linked-list .app-container .box .box_item:last-child::after {
+  color: rgb(126, 9, 9);
+} */
+
+.doubly-linked-list .app-container .box .box_item:first-child::before {
+  content: 'Head';
+  position: absolute;
+  top: -20px;
+  left: 0;
+}
+
+.doubly-linked-list .app-container .box-tail {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 35px;
+}
+
+.doubly-linked-list
+  .app-container
+  .box_container[before-text='null']
+  .box-tail {
+  border: 1px solid black;
+  min-width: 50px;
+}
+
+.doubly-linked-list
+  .app-container
+  .box_container[before-text='null']
+  .box__line::before {
+  content: 'Tail';
+  position: absolute;
+  top: -20px;
+  right: 0;
+  left: 0;
+  margin: auto;
+  width: max-content;
+  color: rgb(126, 9, 9);
+}
+
+/* .doubly-linked-list .app-container .box .box_item:last-child::after {
+  content: 'Tail';
+  position: absolute;
+  top: -20px;
+  right: 0;
+} */
+
+.doubly-linked-list .app-container .box .box_item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  height: 35px;
+  border: none;
+}
+
+.doubly-linked-list .app-container .box .box_item > * {
+  height: 35px;
+  line-height: 35px;
+  padding: 0 4px;
+  min-width: 40px;
+  border: 1px solid #333;
+}

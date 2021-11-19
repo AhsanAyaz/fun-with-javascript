@@ -1,7 +1,9 @@
 import '@styles/globals.css';
 import '@styles/linked_list.css';
+import './style.css';
 import LinkedList from './linked_list';
-import { renderLinkedList, initiateHandlers } from './ui-handlers';
+import renderLinkedList from './render';
+import initiateHandlers from './ui_handlers';
 
 const linkedList = new LinkedList();
 
@@ -10,7 +12,7 @@ const main = () => {
   linkedList.push('33');
   linkedList.push('abc');
   linkedList.push('xyz');
-  initiateHandlers(linkedList);
+  initiateHandlers(linkedList, renderLinkedList);
   renderLinkedList(linkedList);
 };
 

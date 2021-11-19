@@ -1,21 +1,4 @@
-export const renderLinkedList = (linkedList) => {
-  const boxElement = document.querySelector('.box');
-  boxElement.querySelectorAll('.box_item').forEach((item) => item.remove());
-  let current = linkedList.head;
-  if (linkedList.head === null) {
-    return;
-  }
-  for (let i = 0; i < linkedList.size() && current !== null; i++) {
-    const itemElement = document.createElement('DIV');
-    itemElement.classList.add('box_item');
-    itemElement.classList.add('icon', 'icon-arrow-right');
-    itemElement.textContent = current.element;
-    boxElement.append(itemElement);
-    current = current.next;
-  }
-};
-
-export const initiateHandlers = (linkedList) => {
+const initiateHandlers = (linkedList, renderLinkedList) => {
   const pushBtn = document.querySelector('#pushBtn');
   const insertAtBtn = document.querySelector('#insertAtBtn');
   const removeElementBtn = document.querySelector('#removeElementBtn');
@@ -90,3 +73,5 @@ export const initiateHandlers = (linkedList) => {
     renderLinkedList(linkedList);
   });
 };
+
+export default initiateHandlers;

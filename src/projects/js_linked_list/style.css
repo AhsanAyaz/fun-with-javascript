@@ -1,0 +1,21 @@
+.icon::before {
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+.icon.icon-arrow-right {
+  content: '';
+  font-family: inherit;
+  font-weight: normal;
+}
+
+.icon.icon-arrow-right::before {
+  position: absolute;
+  left: -18px;
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: '\f061';
+}
