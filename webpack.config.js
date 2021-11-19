@@ -8,12 +8,11 @@ const isProduction = process.env.NODE_ENV !== 'development';
 const excludedFolders = ['styles'];
 
 const srcDir = path.join(__dirname, './src');
+const projectsDir = path.join(__dirname, './src/projects');
 
 const getDirectories = (source) =>
   readdirSync(source, { withFileTypes: true })
-    .filter((dirent) => {
-      return dirent.isDirectory() && !excludedFolders.includes(dirent.name);
-    })
+    .filter((dirent) => dirent.isDirectory())
     .map((dirent) => dirent.name);
 const parseTitle = (body) => {
   let match = body.match(/<title>([^<]*)<\/title>/);
@@ -25,10 +24,10 @@ const parseTitle = (body) => {
 let entries = {};
 const defaultFileNames = ['script.js', 'main.js'];
 
-const projects = getDirectories(srcDir);
+const projects = getDirectories(projectsDir);
 
 const plugins = projects.map((folderName) => {
-  const folderPath = path.join(srcDir, `./${folderName}`);
+  const folderPath = path.join(projectsDir, `./${folderName}`);
   const htmlContent = readFileSync(
     path.join(folderPath, './index.html'),
     'utf-8'
@@ -64,7 +63,7 @@ if (isProduction) {
   const copyDirectoryHTML = new CopyWebpackPlugin({
     patterns: [
       {
-        from: path.join(srcDir, `./directory.html`),
+        from: path.join(srcDir, `./index.html`),
         to: 'index.html',
         transform(content) {
           return content
@@ -92,6 +91,12 @@ module.exports = {
     filename: '[name]/[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
+  },
+  resolve: {
+    alias: {
+      '@styles': path.resolve(__dirname, './src/styles'),
+      '@scripts': path.resolve(__dirname, './src/scripts'),
+    },
   },
   module: {
     rules: [

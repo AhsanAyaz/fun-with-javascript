@@ -1,0 +1,46 @@
+@import './loaders.css';
+.app-container {
+  margin-top: 30px;
+}
+.app-container__heading {
+  margin: 20px auto 40px auto;
+}
+.app-container section {
+  height: 100vh;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 300px;
+}
+
+.app-container section:nth-child(even) {
+  background-color: #f1f1f1;
+  color: #333;
+}
+
+.app-container section:nth-child(odd) {
+  background-color: #333;
+  color: white;
+}
+
+.app-container section .card .card-body {
+  color: #333;
+}
+
+.app-container .card .card-img-top {
+  height: 160px;
+  object-fit: cover;
+}
+
+.app-container section .col-md-6 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media all and (max-width: 767px) {
+  .app-container section .col-md-6 {
+    margin-bottom: 60px;
+  }
+}

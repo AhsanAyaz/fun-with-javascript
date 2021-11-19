@@ -1,0 +1,49 @@
+.app-container .box_container {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  width: 400px;
+  max-width: 400px;
+  position: relative;
+}
+
+.app-container .box {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+
+.app-container .box .box_item {
+  padding: 8px;
+}
+
+.app-container .box_container::before,
+.app-container .box_container::after {
+  font-weight: bold;
+  color: #333;
+  position: absolute;
+}
+.app-container .box_container::before {
+  content: 'Front';
+  left: -50px;
+}
+.app-container .box_container::after {
+  content: 'Rear';
+  right: -50px;
+}
+
+.app-container .buttons-container {
+  flex-direction: column;
+}
+.app-container .buttons-container .btn-group {
+  margin: 10px auto;
+}
+
+section {
+  margin: 20px auto;
+}
+
+#palindromeBtn {
+  margin-top: 10px;
+}

@@ -1,4 +1,4 @@
-import '../styles/globals.css';
+import '@styles/globals.css';
 import './style.css';
 import calculateFactorial from './calculateFactorial';
 import calculateFactorialWithUI from './calculateFactorialWithUI';
