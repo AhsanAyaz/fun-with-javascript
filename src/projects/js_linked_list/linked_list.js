@@ -45,7 +45,7 @@ class LinkedList {
     }
 
     this.count--;
-    return current.element;
+    return current;
   }
 
   getElementAt(index) {

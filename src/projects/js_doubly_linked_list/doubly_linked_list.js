@@ -1,11 +1,4 @@
-import LinkedList, { Node, defaultEqFn } from '../js_linked_list/linked_list';
-export class DoublyLLNode extends Node {
-  constructor(element, next, previous) {
-    super(element, next);
-    this.previous = previous;
-  }
-}
-
+import LinkedList, { defaultEqFn } from '../js_linked_list/linked_list';
 class DoublyLinkedList extends LinkedList {
   constructor(equalsFn = defaultEqFn) {
     super(equalsFn);
@@ -26,7 +19,7 @@ class DoublyLinkedList extends LinkedList {
     let current = this.head;
     if (index === 0) {
       const newNode = new DoublyLLNode(element);
-      // adding the first item of the linked list
+      // adding as the first item of the linked list
       if (this.head === null) {
         this.head = newNode;
         this.tail = newNode;
@@ -38,7 +31,7 @@ class DoublyLinkedList extends LinkedList {
       this.count++;
       return newNode;
     } else if (index === this.size()) {
-      // adding the first item of the linked list
+      // adding as the last item of the linked list
       return this.push(element);
     } else {
       const previousElement = super.getElementAt(index - 1);
@@ -48,6 +41,36 @@ class DoublyLinkedList extends LinkedList {
       current.previous = newNode;
       return newNode;
     }
+  }
+
+  removeAt(index) {
+    if (index < 0 || index >= this.size()) {
+      return false;
+    }
+    const previousItem = super.getElementAt(index - 1);
+    let removedEl;
+    if (index === 0) {
+      // removing the first item from the linked list
+      removedEl = super.removeAt(index);
+      if (this.size() === 0) {
+        // linked list is now empty
+        this.tail = null;
+      } else {
+        // linked still contains items
+        this.head.previous = null;
+      }
+    } else if (index === this.size() - 1) {
+      // remove the last item from the linked list
+      removedEl = super.removeAt(index);
+      this.tail = previousItem;
+      this.tail.next = null;
+    } else {
+      // the item to remove is somewhere between first and last item
+      removedEl = super.removeAt(index);
+      previousItem.next = removedEl.next;
+      removedEl.next.previous = previousItem;
+    }
+    return removedEl;
   }
 
   clear() {

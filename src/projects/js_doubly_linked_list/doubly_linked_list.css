@@ -1,48 +1,64 @@
+.doubly-linked-list {
+  --tail-color: rgb(126, 9, 9);
+  --head-color: teal;
+}
+
 .doubly-linked-list .app-container {
   max-width: 960px;
 }
+
+.doubly-linked-list .app-container .box {
+  width: 100%;
+}
+
 .doubly-linked-list .app-container .box_container::before {
   content: attr(before-text);
   white-space: break-spaces;
 }
 
 .doubly-linked-list .app-container .box_container {
-  height: 90px;
+  height: 150px;
   max-width: unset;
   width: 80%;
 }
 
-.doubly-linked-list .app-container .box .box_item:first-child {
-  margin-left: 4px;
-}
-
-.doubly-linked-list .app-container .box .box_item:first-child .icon-arrow-left,
-.doubly-linked-list .app-container .box .box_item:first-child::before {
-  color: teal;
-}
-
-.doubly-linked-list .app-container .box .box_item:last-child .icon-arrow-right {
-  display: none;
-}
-
-.doubly-linked-list .app-container .box__arrow {
-  color: rgb(126, 9, 9);
-}
-
-.doubly-linked-list .app-container .box__line {
-  background-color: rgb(126, 9, 9);
+.doubly-linked-list .app-container .box .box_item:first-child .box-item-text {
+  color: var(--head-color);
+  font-weight: bold;
   position: relative;
 }
 
-/* .doubly-linked-list .app-container .box .box_item:last-child::after {
-  color: rgb(126, 9, 9);
-} */
+.doubly-linked-list .app-container .box .box_item:last-child {
+  flex: 1;
+}
 
-.doubly-linked-list .app-container .box .box_item:first-child::before {
+.doubly-linked-list .app-container .box .box_item:last-child .box-item-text {
+  color: var(--tail-color);
+  font-weight: bold;
+  position: relative;
+}
+
+.doubly-linked-list .app-container .box .box_item:last-child .icon-arrow-right {
+  flex: 1;
+}
+
+.doubly-linked-list .app-container .box__line {
+  position: relative;
+}
+
+.doubly-linked-list
+  .app-container
+  .box
+  .box_item:first-child
+  .box-item-text::before {
   content: 'Head';
   position: absolute;
-  top: -20px;
+  top: -28px;
   left: 0;
+  right: 0;
+  margin: auto;
+  font-weight: bold;
+  color: var(--head-color);
 }
 
 .doubly-linked-list .app-container .box-tail {
@@ -62,24 +78,37 @@
 
 .doubly-linked-list
   .app-container
-  .box_container[before-text='null']
-  .box__line::before {
-  content: 'Tail';
-  position: absolute;
-  top: -20px;
-  right: 0;
-  left: 0;
-  margin: auto;
-  width: max-content;
-  color: rgb(126, 9, 9);
+  .box_container:not([before-text='null'])
+  .box {
+  display: none;
 }
 
-/* .doubly-linked-list .app-container .box .box_item:last-child::after {
+.doubly-linked-list
+  .app-container
+  .box_container[before-text='null']
+  .box-tail {
+  display: none;
+}
+
+.doubly-linked-list
+  .app-container
+  .box
+  .box_item:last-child
+  .box-item-text::after {
   content: 'Tail';
   position: absolute;
-  top: -20px;
+  bottom: -27px;
+  left: 0;
   right: 0;
-} */
+  margin: auto;
+  font-weight: bold;
+  width: max-content;
+  color: var(--tail-color);
+}
+
+.doubly-linked-list .app-container .box .box_item:first-child {
+  margin-left: 0;
+}
 
 .doubly-linked-list .app-container .box .box_item {
   display: flex;
