@@ -1,4 +1,4 @@
-import LinkedList, { defaultEqFn } from '../js_linked_list/linked_list';
+import LinkedList, { defaultEqFn, Node } from '../js_linked_list/linked_list';
 class DoublyLinkedList extends LinkedList {
   constructor(equalsFn = defaultEqFn) {
     super(equalsFn);
@@ -18,8 +18,9 @@ class DoublyLinkedList extends LinkedList {
     }
     let current = this.head;
     if (index === 0) {
-      const newNode = new DoublyLLNode(element);
-      // adding as the first item of the linked list
+      const newNode = new Node(element);
+      newNode.previous = null;
+      // adding the first item of the linked list
       if (this.head === null) {
         this.head = newNode;
         this.tail = newNode;
@@ -31,7 +32,7 @@ class DoublyLinkedList extends LinkedList {
       this.count++;
       return newNode;
     } else if (index === this.size()) {
-      // adding as the last item of the linked list
+      // adding the first item of the linked list
       return this.push(element);
     } else {
       const previousElement = super.getElementAt(index - 1);
