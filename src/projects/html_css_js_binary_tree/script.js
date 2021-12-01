@@ -1,3 +1,4 @@
+import '@styles/tree.css';
 import './style.css';
 const getTreeData = () => {
   return {
@@ -47,7 +48,7 @@ const getTreeData = () => {
   };
 };
 
-const renderTree = (node) => {
+export const renderBinaryTree = (node) => {
   const { left, right, element } = node;
   return `
     <div class="node__element">${element}</div>
@@ -60,7 +61,7 @@ const renderTree = (node) => {
               left
                 ? `
                 <div class="node node--left">
-                  ${renderTree(left)}
+                  ${renderBinaryTree(left)}
                 </div>
                 `
                 : ''
@@ -69,7 +70,7 @@ const renderTree = (node) => {
               right
                 ? `
                 <div class="node node--right">
-                  ${renderTree(right)}
+                  ${renderBinaryTree(right)}
                 </div>
                 `
                 : ''
@@ -85,7 +86,7 @@ const main = () => {
   const rootNode = getTreeData();
   console.log('treeData', rootNode);
   const treeDOMElement = document.querySelector('.tree');
-  treeDOMElement.innerHTML = renderTree(rootNode);
+  treeDOMElement.innerHTML = renderBinaryTree(rootNode);
 };
 
 main();
