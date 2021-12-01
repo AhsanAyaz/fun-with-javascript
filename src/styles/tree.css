@@ -1,0 +1,92 @@
+.tree {
+  --dark: #333;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.tree .node {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px;
+  position: relative;
+}
+
+.tree .node:not(.node--root) > .node__element::before {
+  content: '';
+  height: 20px;
+  width: 1px;
+  background-color: #dcdcdc;
+  display: block;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -20px;
+  margin: auto;
+}
+
+.tree .node.node--left {
+  margin-right: 10px;
+}
+
+.tree .node.node--right {
+  margin-left: 10px;
+}
+
+.tree .node__element {
+  cursor: pointer;
+  border: 1px solid transparent;
+  height: 40px;
+  background-color: rgb(188, 117, 246);
+  border-radius: 16px;
+  min-width: 60px;
+  max-width: max-content;
+
+  padding: 4px 8px;
+  font-size: 12px;
+  line-height: 32px;
+  text-align: center;
+}
+
+.tree .node__bottom-line {
+  height: 20px;
+  width: 1px;
+  background-color: #dcdcdc;
+}
+
+.tree .node__element,
+.tree .node__element::before,
+.tree .node__children,
+.tree .node__bottom-line {
+  transition: all ease 0.2s;
+}
+
+.tree .node__children {
+  display: flex;
+  padding: 20px 0;
+  border-top: 1px solid #dcdcdc;
+}
+
+.tree .node__element:hover {
+  border-color: var(--dark);
+}
+
+.tree .node__element:hover ~ .node__children .node__element::before {
+  width: 2px;
+  background-color: var(--dark);
+}
+
+.tree .node__element:hover ~ .node__bottom-line,
+.tree .node__element:hover ~ .node__children .node__bottom-line {
+  width: 2px;
+  background-color: var(--dark);
+}
+
+.tree .node__element:hover ~ .node__children,
+.tree .node__element:hover ~ .node__children .node__children {
+  border-top-width: 2px;
+  border-color: var(--dark);
+}
