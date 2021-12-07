@@ -5,3 +5,9 @@
   position: relative;
   background-color: transparent;
 }
+
+.buttons-container {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
