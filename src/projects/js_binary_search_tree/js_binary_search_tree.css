@@ -10,4 +10,28 @@
   display: flex;
   gap: 16px;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.node__element--highlight {
+  animation: nodeHighlight 1.5s ease;
+}
+
+@keyframes nodeHighlight {
+  0% {
+    background-color: #333;
+    color: white;
+  }
+  25% {
+    background-color: rgb(138, 245, 255);
+    color: #333;
+  }
+  75% {
+    background-color: #333;
+    color: white;
+  }
+  100% {
+    background-color: rgb(188, 117, 246);
+    color: #212529;
+  }
 }

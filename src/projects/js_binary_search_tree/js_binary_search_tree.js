@@ -38,6 +38,7 @@ class BinarySearchTree {
 
   insert(value) {
     let node = this.root;
+    let insertedNode;
     if (node === null) {
       this.root = new TreeNode(value);
       return this.root;
@@ -46,18 +47,21 @@ class BinarySearchTree {
       while (true) {
         const comparison = this.compareFn(value, node.value);
         if (comparison === COMPARISON.EQUAL) {
-          return false;
+          insertedNode = node;
+          return node;
         }
         if (comparison === COMPARISON.SMALLER) {
           if (node.left === null) {
-            node.left = new TreeNode(value, node);
+            insertedNode = new TreeNode(value, node);
+            node.left = insertedNode;
             return true;
           } else {
             node = node.left;
           }
         } else if (comparison === COMPARISON.GREATER) {
           if (node.right === null) {
-            node.right = new TreeNode(value, node);
+            insertedNode = new TreeNode(value, node);
+            node.right = insertedNode;
             return true;
           } else {
             node = node.right;
@@ -66,7 +70,7 @@ class BinarySearchTree {
       }
     })();
     if (nodeInserted) {
-      return node;
+      return insertedNode;
     }
   }
 
@@ -104,14 +108,14 @@ class BinarySearchTree {
       return node;
     } else {
       const minRightLeaf = this.min(node.right);
-      console.log('minRightLeaf', minRightLeaf);
       if (minRightLeaf.parent.left === minRightLeaf) {
         minRightLeaf.parent.left = null;
       } else {
         minRightLeaf.parent.right = null;
       }
+      const clone = { ...node };
       node.value = minRightLeaf.value;
-      return node;
+      return clone;
     }
   }
   search(value) {
