@@ -7,7 +7,7 @@ import initiateHandlers from './bst-ui';
 export const renderBinarySearchTree = (node) => {
   const { left, right, value } = node;
   return `
-    <div class="node__element">${value}</div>
+    <div class="node__element" data-node-id="${value}">${value}</div>
     ${
       left || right
         ? `
