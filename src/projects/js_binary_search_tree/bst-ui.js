@@ -42,6 +42,7 @@ const initiateHandlers = (tree, render) => {
   const preOrderTravBtn = document.querySelector('#preOrderTravBtn');
   const inOrderTravBtn = document.querySelector('#inOrderTravBtn');
   const postOrderTravBtn = document.querySelector('#postOrderTravBtn');
+  const resetBtn = document.querySelector('#resetBtn');
   removeElementBtn.addEventListener('click', () => {
     const element = prompt('Enter element to remove from the tree');
     const removedEl = tree.remove(element);
@@ -102,6 +103,13 @@ const initiateHandlers = (tree, render) => {
     traverseUINodes(array);
     console.log(array);
   });
+  resetBtn.addEventListener('click', () => {
+    highlightNode(tree.root).then(() => {
+      tree.root = null;
+      render(tree.root);
+    });
+  });
+
 };
 
 const root = document.documentElement;

@@ -5,6 +5,9 @@ import BinarySearchTree from './js_binary_search_tree';
 import initiateHandlers from './bst-ui';
 
 export const renderBinarySearchTree = (node) => {
+  if (!node) {
+    return '';
+  }
   const { left, right, value } = node;
   return `
     <div class="node__element" data-node-id="${value}">${value}</div>
