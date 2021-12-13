@@ -1,5 +1,5 @@
 const HIGHLIGHT_CLASS = 'node__element--highlight';
-const HIGHLIGHT_TIME = 1500;
+const HIGHLIGHT_TIME = 300;
 let highlightTimer = null;
 
 const traverseUINodes = (nodes) => {
@@ -55,6 +55,9 @@ const initiateHandlers = (tree, render) => {
   });
   insert.addEventListener('click', () => {
     const element = prompt('Enter element to add to tree');
+    if (!element) {
+      return;
+    }
     const node = tree.insert(element);
     render(tree.root);
     highlightNode(node);
@@ -100,5 +103,8 @@ const initiateHandlers = (tree, render) => {
     console.log(array);
   });
 };
+
+const root = document.documentElement;
+root.style.setProperty('--animation-timing', `${HIGHLIGHT_TIME / 1000}s`);
 
 export default initiateHandlers;

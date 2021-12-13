@@ -1,3 +1,7 @@
+:root {
+  --animation-timing: 1.5s;
+}
+
 .app-container {
   flex-direction: row;
   justify-content: space-between;
@@ -14,7 +18,7 @@
 }
 
 .node__element--highlight {
-  animation: nodeHighlight 1.5s ease;
+  animation: nodeHighlight var(--animation-timing) ease;
 }
 
 @keyframes nodeHighlight {

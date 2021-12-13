@@ -4,12 +4,12 @@ const COMPARISON = {
   GREATER: 1,
 };
 
-const defaultCompareFn = (a, b) => {
-  if (a == b) {
+const defaultCompareNumberFn = (a, b) => {
+  if (Number(a) == Number(b)) {
     return COMPARISON.EQUAL;
   }
 
-  return a < b ? COMPARISON.SMALLER : COMPARISON.GREATER;
+  return Number(a) < Number(b) ? COMPARISON.SMALLER : COMPARISON.GREATER;
 };
 
 class TreeNode {
@@ -31,7 +31,7 @@ class TreeNode {
 class BinarySearchTree {
   root;
   compareFn;
-  constructor(compareFn = defaultCompareFn) {
+  constructor(compareFn = defaultCompareNumberFn) {
     this.root = null;
     this.compareFn = compareFn;
   }
