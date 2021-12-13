@@ -55,17 +55,15 @@ class BinarySearchTree {
             insertedNode = new TreeNode(value, node);
             node.left = insertedNode;
             return true;
-          } else {
-            node = node.left;
           }
+          node = node.left;
         } else if (comparison === COMPARISON.GREATER) {
           if (node.right === null) {
             insertedNode = new TreeNode(value, node);
             node.right = insertedNode;
             return true;
-          } else {
-            node = node.right;
           }
+          node = node.right;
         }
       }
     })();
@@ -85,38 +83,35 @@ class BinarySearchTree {
     if (node.isLeaf) {
       if (nodeIsRoot) {
         this.root = null;
+      } else if (node.parent.left === node) {
+        node.parent.left = null;
       } else {
-        if (node.parent.left === node) {
-          node.parent.left = null;
-        } else {
-          node.parent.right = null;
-        }
+        node.parent.right = null;
       }
       return node;
-    } else if (!hasBothChildren) {
+    }
+    if (!hasBothChildren) {
       const child = node.left !== null ? node.left : node.right;
       if (nodeIsRoot) {
         this.root = child;
+      } else if (isLeftChild) {
+        node.parent.left = child;
       } else {
-        if (isLeftChild) {
-          node.parent.left = child;
-        } else {
-          node.parent.right = child;
-        }
+        node.parent.right = child;
       }
       child.parent = node.parent;
       return node;
-    } else {
-      const minRightLeaf = this.min(node.right);
-      if (minRightLeaf.parent.left === minRightLeaf) {
-        minRightLeaf.parent.left = null;
-      } else {
-        minRightLeaf.parent.right = null;
-      }
-      const clone = { ...node };
-      node.value = minRightLeaf.value;
-      return clone;
     }
+
+    const minRightLeaf = this.min(node.right);
+    if (minRightLeaf.parent.left === minRightLeaf) {
+      minRightLeaf.parent.left = null;
+    } else {
+      minRightLeaf.parent.right = null;
+    }
+    const clone = { ...node };
+    node.value = minRightLeaf.value;
+    return clone;
   }
   search(value) {
     return this.postOrderTraverse().find((node) => node.value === value);
