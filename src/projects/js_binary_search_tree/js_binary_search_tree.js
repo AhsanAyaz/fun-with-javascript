@@ -83,7 +83,7 @@ class BinarySearchTree {
     if (node.isLeaf) {
       if (nodeIsRoot) {
         this.root = null;
-      } else if (node.parent.left === node) {
+      } else if (isLeftChild) {
         node.parent.left = null;
       } else {
         node.parent.right = null;
