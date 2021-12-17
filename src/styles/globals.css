@@ -72,13 +72,13 @@ body > .main {
 }
 
 .icon.icon-arrow-right::before {
-  font-family: 'Font Awesome 5 Free';
+  font-family: 'Font Awesome 5 Free, Monospace';
   font-weight: 900;
   content: '\f061';
 }
 
 .icon.icon-arrow-left::before {
-  font-family: 'Font Awesome 5 Free';
+  font-family: 'Font Awesome 5 Free, Monospace';
   font-weight: 900;
   content: '\f060';
 }
