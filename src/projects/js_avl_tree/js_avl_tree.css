@@ -1,0 +1,9 @@
+.app-container {
+  max-width: 90% !important;
+  margin: auto;
+}
+.trees-container {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}

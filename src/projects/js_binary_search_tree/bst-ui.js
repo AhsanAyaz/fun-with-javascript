@@ -95,8 +95,11 @@ class BinarySearchTreeUI {
     `;
   }
 
-  renderTree(node = this.tree.root) {
-    const treeContainer = document.querySelector(this.treeContainerSelector);
+  renderTree(
+    node = this.tree.root,
+    containerSelector = this.treeContainerSelector
+  ) {
+    const treeContainer = document.querySelector(containerSelector);
     if (!node) {
       return (treeContainer.innerHTML = '');
     }
