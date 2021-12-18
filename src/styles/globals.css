@@ -73,13 +73,13 @@ body > .main {
 }
 
 .icon.icon-arrow-right::before {
-  font-family: 'Font Awesome 5 Free, sans-serif';
+  font-family: 'Font Awesome 5 Free', sans-serif;
   font-weight: 900;
   content: '\f061';
 }
 
 .icon.icon-arrow-left::before {
-  font-family: 'Font Awesome 5 Free, sans-serif';
+  font-family: 'Font Awesome 5 Free', sans-serif;
   font-weight: 900;
   content: '\f060';
 }

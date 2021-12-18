@@ -15,7 +15,7 @@
 .icon.icon-arrow-right::before {
   position: absolute;
   left: -18px;
-  font-family: 'Font Awesome 5 Free, sans-serif';
+  font-family: 'Font Awesome 5 Free', sans-serif;
   font-weight: 900;
   content: '\f061';
 }
