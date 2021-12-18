@@ -3,32 +3,86 @@ import BinarySearchTreeUI from '../js_binary_search_tree/bst-ui';
 const colors = ['#D6FFB7', '#F5FF90', '#FFC15E', '#FF9F1C', '#2AFC98'];
 
 export default class AVLTreeUI extends BinarySearchTreeUI {
-  showBalancePreview = true;
+  balancePreviewVisible = true;
+  balancedTree;
   constructor() {
     super(...arguments);
     this.treeContainerSelector = '.avl-tree';
     this.actionsContainerSelector = '.avl-actions-container';
   }
 
+  resetBalancedTreeView() {
+    if (!this.balancedTree) {
+      return;
+    }
+    const toggleBalancePreviewBtn = document.querySelector('#switchPreviewBtn');
+    this.tree = _.clone(this.balancedTree);
+    this.balancedTree = null;
+    this.hideBalancePreview();
+    this.render(this.tree.root);
+    toggleBalancePreviewBtn.setAttribute('hidden', true);
+    document.querySelectorAll('button').forEach((btn) => {
+      btn.removeAttribute('disabled');
+    });
+  }
+
   init() {
     super.init();
+    const toggleBalancePreviewBtn = document.querySelector('#switchPreviewBtn');
+
+    toggleBalancePreviewBtn.addEventListener('click', () => {
+      this.resetBalancedTreeView();
+    });
+  }
+
+  template() {
+    let baseTemplate = super.template();
+    baseTemplate += `
+      <div class="btn-group">
+        <button id="switchPreviewBtn" hidden="true" class="btn btn-dark">
+          Hide Balance Tree Preview
+        </button>
+      </div>
+    `;
+    return baseTemplate;
+  }
+
+  onInsertBtnClick() {
+    const element = prompt('Enter element to insert into the tree');
+    const insertedEl = this.tree.insert(element);
+    if (this.balancePreviewVisible) {
+      this.balancedTree = _.cloneDeep(this.tree);
+    }
+    if (insertedEl) {
+      if (!this.balancePreviewVisible) {
+        this.render(this.tree.root);
+        this.hideBalancePreview();
+        this.highlightNode(insertedEl);
+      } else {
+        this.showBalancePreview(this.balancedTree);
+      }
+    } else {
+      alert('Element already exists');
+    }
   }
 
   onRemoveElementBtnClick() {
-    // const balancePreviewEnabled = this.showBalancePreview;
-    // Todo: this will be better. Don't judge me
-    const balancePreviewEnabled = window.SHOW_BALANCE_PREVIEW;
     const element = prompt('Enter element to remove from the tree');
-    const clone = _.cloneDeep(this.tree);
-    const removedEl = balancePreviewEnabled
-      ? clone.remove(element)
-      : this.tree.remove(element);
+    let removedEl;
+    if (this.balancePreviewVisible) {
+      this.balancedTree = _.cloneDeep(this.tree);
+      removedEl = this.balancedTree.remove(element);
+    } else {
+      removedEl = this.tree.remove(element);
+      this.balancedTree = null;
+    }
     if (removedEl) {
       this.highlightNode(removedEl).then(() => {
-        if (!balancePreviewEnabled) {
+        if (!this.balancePreviewVisible) {
           this.render(this.tree.root);
+          this.hideBalancePreview();
         } else {
-          this.balancePreview(clone);
+          this.showBalancePreview(this.balancedTree);
         }
       });
     } else {
@@ -36,7 +90,25 @@ export default class AVLTreeUI extends BinarySearchTreeUI {
     }
   }
 
-  balancePreview(clone) {
+  hideBalancePreview() {
+    const selector = '.avl-tree-clone';
+    const treeContainer = document.querySelector(selector);
+    treeContainer.innerHTML = '';
+  }
+
+  disableAllBtnsExceptPreview() {
+    const allButtons = document.querySelectorAll('button');
+    allButtons.forEach((btn) => {
+      if (btn.getAttribute('id') === 'switchPreviewBtn') {
+        btn.removeAttribute('hidden');
+      } else {
+        btn.setAttribute('disabled', true);
+      }
+    });
+  }
+
+  showBalancePreview(clone) {
+    this.disableAllBtnsExceptPreview();
     const selector = '.avl-tree-clone';
     const treeContainer = document.querySelector(selector);
     this.renderTree(clone.root, selector);
