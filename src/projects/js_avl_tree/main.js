@@ -7,28 +7,53 @@ import AVLTreeUI from './avl_tree_ui';
 import createSampleTreeData from '../../common/create-sample-tree-data';
 
 const main = () => {
-  const avlTree = new AVLTree();
-  // createSampleTreeData(avlTree);
-  avlTree.insert(70);
-  avlTree.insert(80);
-  avlTree.insert(50);
-  avlTree.insert(90);
-  avlTree.insert(72);
-  avlTree.insert(75);
-  avlTree.insert(78);
-  console.log('avlTreeData', avlTree);
+  const avlTree = rightLeftHeavy();
   const avlUI = new AVLTreeUI(avlTree);
   avlUI.init();
   avlUI.render();
-  const clone = _.cloneDeep(avlTree);
-  const removedEl = clone.remove('50');
-  if (removedEl) {
-    avlUI.highlightNode(removedEl).then(() => {
-      avlUI.render(avlTree.root);
-    });
-  } else {
-    alert('Element not found');
-  }
 };
+
+const leftHeavyTree = () => {
+  // LL Imbalance
+  const tree = new AVLTree();
+  tree.insert(30);
+  tree.insert(20);
+  // tree.insert(10);
+  return tree;
+};
+const rightHeavyTree = () => {
+  // RR Imbalance
+  const tree = new AVLTree();
+  tree.insert(30);
+  tree.insert(40);
+  // tree.insert(50);
+  return tree;
+};
+
+const leftRightHeavyTree = () => {
+  // LR Imbalance
+  const tree = new AVLTree();
+  tree.insert(30);
+  tree.insert(10);
+  // tree.insert(20);
+  return tree;
+};
+
+const rightLeftHeavy = () => {
+  // RL Imbalance
+  const tree = new AVLTree();
+  tree.insert(30);
+  tree.insert(50);
+  // tree.insert(40);
+  return tree;
+};
+
+const someWhatBalancedTree = () => {
+  const tree = new AVLTree();
+  createSampleTreeData(tree);
+  return tree;
+};
+
+
 
 main();
