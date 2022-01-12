@@ -1,4 +1,5 @@
 import BinarySearchTreeUI from '../js_binary_search_tree/bst-ui';
+import BinarySearchTree from '../js_binary_search_tree/js_binary_search_tree';
 
 const colors = ['#D6FFB7', '#F5FF90', '#FFC15E', '#FF9F1C', '#2AFC98'];
 
@@ -49,6 +50,8 @@ export default class AVLTreeUI extends BinarySearchTreeUI {
 
   onInsertBtnClick() {
     const element = prompt('Enter element to insert into the tree');
+    const bst = new BinarySearchTree();
+    bst.root = _.cloneDeep(this.tree).root;
     const insertedEl = this.tree.insert(element);
     if (this.balancePreviewVisible) {
       this.balancedTree = _.cloneDeep(this.tree);
@@ -59,7 +62,9 @@ export default class AVLTreeUI extends BinarySearchTreeUI {
         this.hideBalancePreview();
         this.highlightNode(insertedEl);
       } else {
-        this.showBalancePreview(this.balancedTree);
+        bst.insert(element);
+        this.render(bst.root);
+        this.showBalancePreview(this.balancedTree, bst);
       }
     } else {
       alert('Element already exists');
@@ -107,7 +112,7 @@ export default class AVLTreeUI extends BinarySearchTreeUI {
     });
   }
 
-  showBalancePreview(clone) {
+  showBalancePreview(clone, tree = this.tree) {
     this.disableAllBtnsExceptPreview();
     const selector = '.avl-tree-clone';
     const treeContainer = document.querySelector(selector);
@@ -117,7 +122,7 @@ export default class AVLTreeUI extends BinarySearchTreeUI {
     const colorsHash = {};
     let index = 0;
     for (const current of cloneTree) {
-      const match = this.tree.search(current.value);
+      const match = tree.search(current.value);
       if (!match) {
         continue;
       }
