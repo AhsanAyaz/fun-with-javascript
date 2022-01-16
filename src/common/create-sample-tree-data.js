@@ -1,19 +1,33 @@
-export default function createSampleTreeData(tree) {
+export default function createSampleTreeData(tree, ui) {
   tree.insert(11);
+  ui?.render();
   tree.insert(7);
+  ui?.render();
   tree.insert(5);
+  ui?.render();
   tree.insert(3);
+  ui?.render();
   tree.insert(6);
+  ui?.render();
   tree.insert(9);
+  ui?.render();
   tree.insert(8);
+  ui?.render();
   tree.insert(10);
+  ui?.render();
   tree.insert(15);
-  console.log(tree.insert(13));
+  ui?.render();
   tree.insert(12);
+  ui?.render();
   tree.insert(14);
+  ui?.render();
   tree.insert(20);
+  ui?.render();
   tree.insert(18);
+  ui?.render();
   tree.insert(25);
+  ui?.render();
+  debugger;
   console.log('inOrderTraverse');
   console.log(tree.inOrderTraverse());
   console.log('preOrderTraverse');

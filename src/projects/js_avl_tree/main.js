@@ -9,6 +9,7 @@ import createSampleTreeData from '../../common/create-sample-tree-data';
 const main = () => {
   const avlTree = sampleData();
   const avlUI = new AVLTreeUI(avlTree);
+  createSampleTreeData(avlTree, avlUI);
   avlUI.init();
   avlUI.render();
   window.avlTree = avlTree;
@@ -16,7 +17,7 @@ const main = () => {
 
 const sampleData = () => {
   const tree = new AVLTree();
-  createSampleTreeData(tree);
+  // createSampleTreeData(tree);
   return tree;
 };
 

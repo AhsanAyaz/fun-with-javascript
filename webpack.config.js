@@ -3,7 +3,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { readdirSync, readFileSync, existsSync } = require('fs');
 
-const isProduction = process.env.NODE_ENV !== 'development';
+const isProduction = process.env.NODE_ENV === 'production';
 
 const excludedFolders = ['styles'];
 
@@ -77,9 +77,9 @@ if (isProduction) {
 }
 
 module.exports = {
-  mode: process.env.NODE_ENV,
+  mode: isProduction ? 'production' : 'development',
   entry: entries,
-  devtool: 'inline-source-map',
+  devtool: 'source-map',
   plugins,
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
