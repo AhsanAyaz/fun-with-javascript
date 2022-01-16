@@ -7,10 +7,17 @@ import AVLTreeUI from './avl_tree_ui';
 import createSampleTreeData from '../../common/create-sample-tree-data';
 
 const main = () => {
-  const avlTree = rightLeftHeavy();
+  const avlTree = sampleData();
   const avlUI = new AVLTreeUI(avlTree);
   avlUI.init();
   avlUI.render();
+  window.avlTree = avlTree;
+};
+
+const sampleData = () => {
+  const tree = new AVLTree();
+  createSampleTreeData(tree);
+  return tree;
 };
 
 const leftHeavyTree = () => {

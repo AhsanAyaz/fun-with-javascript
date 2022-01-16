@@ -6,7 +6,7 @@ const BALANCE_FACTORS = {
 };
 class AVLTree extends BinarySearchTree {
   getNodeHeight(node) {
-    if (node == null) {
+    if (node === null) {
       return -1;
     }
     return (
@@ -16,42 +16,44 @@ class AVLTree extends BinarySearchTree {
   }
 
   getBalanceFactor(node) {
-    if (node == null) {
+    if (node === null) {
       return 0;
     }
     return this.getNodeHeight(node.right) - this.getNodeHeight(node.left);
   }
 
   rotateRight(node) {
-    const temp = node.left;
-    node.left = temp.right;
-    temp.right = node;
-    temp.parent = node.parent;
-    node.parent = temp;
-    if (temp.parent) {
-      if (temp.parent.left === node) {
-        temp.parent.left = temp;
+    const left = node.left;
+    node.left = left.right;
+    left.right = node;
+
+    left.parent = node.parent;
+    node.parent = left;
+    if (left.parent) {
+      if (left.parent.left === node) {
+        left.parent.left = left;
       } else {
-        temp.parent.right = temp;
+        left.parent.right = left;
       }
     }
-    return temp;
+    return left;
   }
 
   rotateLeft(node) {
-    const temp = node.right;
-    node.right = temp.left;
-    temp.left = node;
-    temp.parent = node.parent;
-    node.parent = temp;
-    if (temp.parent) {
-      if (temp.parent.left === node) {
-        temp.parent.left = temp;
+    const right = node.right;
+    node.right = right.left;
+    right.left = node;
+
+    right.parent = node.parent;
+    node.parent = right;
+    if (right.parent) {
+      if (right.parent.left === node) {
+        right.parent.left = right;
       } else {
-        temp.parent.right = temp;
+        right.parent.right = right;
       }
     }
-    return temp;
+    return right;
   }
 
   rotateLeftRight(node) {
@@ -64,26 +66,29 @@ class AVLTree extends BinarySearchTree {
     return this.rotateLeft(node);
   }
 
-  balanceTreeFromNode(node) {
+  rebalance(node) {
     if (!node) {
       return;
     }
     const balanceFactor = this.getBalanceFactor(node);
     if (balanceFactor < BALANCE_FACTORS.LEFT_HEAVY) {
+      // -2
       if (this.getBalanceFactor(node.left) === BALANCE_FACTORS.LEFT_HEAVY) {
         node = this.rotateRight(node);
       } else {
         node = this.rotateLeftRight(node);
       }
     } else if (balanceFactor > BALANCE_FACTORS.RIGHT_HEAVY) {
+      // +2
       if (this.getBalanceFactor(node.right) === BALANCE_FACTORS.RIGHT_HEAVY) {
         node = this.rotateLeft(node);
       } else {
         node = this.rotateRightLeft(node);
       }
     }
+
     if (node.parent) {
-      this.balanceTreeFromNode(node.parent);
+      this.rebalance(node.parent);
     } else {
       this.root = node;
     }
@@ -91,13 +96,13 @@ class AVLTree extends BinarySearchTree {
 
   remove(value) {
     const node = super.remove(value);
-    this.balanceTreeFromNode(node.parent);
+    this.rebalance(node);
     return node;
   }
 
   insert(value) {
     const node = super.insert(value);
-    this.balanceTreeFromNode(node.parent);
+    this.rebalance(node);
     return node;
   }
 }
